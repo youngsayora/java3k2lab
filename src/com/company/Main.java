@@ -88,7 +88,62 @@ public class Main {
 
             }
             case (4) -> {
+                ArrayList<Student> Students = GetFile("students.txt");
+                System.out.println("Отсортировать по: ");
+                System.out.println("1. Фамилии");
+                System.out.println("2. Возрасту");
+                System.out.println("3. Среднему баллу");
+                Scanner in2 = new Scanner(System.in);
+                int x1  = in1.nextInt();
+                switch (x1) {
+                    case (1) -> {
+                        StudentComparator lastNameComp = new StudentComparator();
+                        TreeSet<Student> people = new TreeSet<Student>(lastNameComp);
+                        people.addAll(Students);
+                        for(Student  p : people){
 
+                            System.out.println(p.getName() +" "+ p.getAverageMark() +" "+ p.getAge());
+
+                        }
+
+                    }
+                    case (2) -> {
+                        Comparator<Student> AgeComp = new StudentComparatorAge().thenComparing(new StudentComparator());
+                        TreeSet<Student> people = new TreeSet<Student>(AgeComp);
+                        people.addAll(Students);
+                        for(Student  p : people){
+
+                            System.out.println(p.getName()+" "+ p.getAverageMark() +" "+ p.getAge());
+
+                        }
+
+                    }
+                    case (3) -> {
+                        StudentComparatorMark MarkComp = new StudentComparatorMark();
+                        TreeSet<Student> people = new TreeSet<Student>(MarkComp);
+                        people.addAll(Students);
+                        for(Student  p : people){
+
+                            System.out.println(p.getName()+" "+ p.getAverageMark() +" "+ p.getAge());
+
+                        }
+
+                    }
+
+                    default -> System.out.println("Такого варианта нет");
+
+                }
+
+
+
+            }
+            case (5) -> {
+                ArrayList<Student> Students = GetFile("students.txt");
+                HashSet<Student> StudentsHashSet = new HashSet<Student>();
+                StudentsHashSet.addAll(Students);
+                for (Student p : StudentsHashSet) {
+                    System.out.println(p.getName()+" "+ p.getAverageMark() +" "+ p.getAge());
+                }
 
             }
             default -> System.out.println("Такого задания нет");
@@ -119,7 +174,7 @@ public class Main {
                 Student temp = new Student();
                 temp.lastName = strings[0];
                 temp.averageMark = Double.parseDouble(strings[1]);
-                temp.age = Integer.parseInt(strings[1]);
+                temp.age = Integer.parseInt(strings[2]);
                 value.add(temp);
 
             }
